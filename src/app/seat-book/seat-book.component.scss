@@ -1,0 +1,41 @@
+.container {
+    padding-top: 10px;
+}
+.coach_row {
+  /* border: 1px solid red; */
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  margin-top: 1em;
+}
+
+.msg {
+  height: 2em;
+}
+
+.circle {
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+   width: 32px;
+  height: 32px;
+  border-radius: 100px;
+  color: white;
+  
+}
+
+.rowx {
+  margin-right: 32px;
+  font-size: 0.71em;
+  background: rgb(106, 121, 132);
+}
+
+.seat {
+background: rgb(97, 221, 157);
+margin: 0 2px;
+}
+
+.seat.booked {
+  background: rgb(236, 69, 122);
+}

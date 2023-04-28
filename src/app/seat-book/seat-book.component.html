@@ -1,0 +1,68 @@
+<div class="container-fluid" style="background-color: rgb(177, 172, 175);">
+    <h1 class="font-weight-bold text-center" >Train Ticket Booking</h1>
+</div>
+<br>
+<div class="container-fluid" style="background-color: rgb(231, 210, 210);">
+	<div class="row">
+		<div class="col-sm-4">
+			<h4><b>Enter no. of seats to book </b></h4>
+			<div class="row">
+				<div class="col-sm-12">
+					<form [formGroup]="bookingForm" (ngSubmit)="book()">
+						<div class="row" style="margin-top: 20px;">
+							<div class="col-sm-6">
+								<div class="form-group">
+                                    <!-- The min and max will allow the user to book only 7 seats at a time -->
+									<input  style="width: 190px;" type="number" min="1" max="7" formControlName="seatsToBook" class="form-control">
+                </div>
+								</div>
+								<div class="col-sm-6">
+                                    <!-- disabled function is set for disabling the "Book" button until the number of seats is entered -->
+									<button type="submit" [disabled]="!bookingForm.valid"
+                                    class="btn btn-success">Book Now</button>
+								</div>
+							</div>
+					</form>
+				</div>
+				<div class="col-sm-12">
+					<p class="text-primary msg">{{message}}</p>
+				</div>
+			</div>
+		</div>
+		<div class="col-sm-1">&nbsp;</div>
+		<div class="col-sm-7">
+			<h4><b>Arrangement of Seats</b></h4>
+			<ng-container *ngIf="(data$ | async) as d">
+
+				<p>Total {{d.total}} Booked: {{d.booked}} Left: {{d.rem}}</p>
+				<ng-container *ngFor="let r of d.seatChart">
+
+					<div class="coach_row">
+						<div class="circle rowx"> R{{r.row}} </div>
+						<ng-container *ngIf="r.row !== 12">
+
+							<ng-container *ngFor="let n of sevenSeater;">
+								<div class="circle seat" [ngClass]="checkBook(n,r.row,r.booked_seats) ? 'booked': ''">
+									{{n + r.start-1}}</div>
+							</ng-container>
+
+						</ng-container>
+
+						<ng-container *ngIf="r.row === 12">
+
+							<ng-container *ngFor="let n of threeSeater;">
+								<div class="circle seat" [ngClass]="checkBook(n,r.row, r.booked_seats) ? 'booked': ''">
+									{{n + r.start-1}}</div>
+							</ng-container>
+
+						</ng-container>
+
+
+					</div>
+
+				</ng-container>
+			</ng-container>
+		</div>
+	</div>
+    <br>
+</div>
